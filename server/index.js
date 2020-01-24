@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
+const errorHandler = require('./error-handler');
 
 const { mongoose } = require('./database');
 
@@ -19,6 +20,8 @@ app.use(express.static(path.join(__dirname, 'dist')));
 // });
 
 app.use('/api', require('./routes/task.routes'));
+
+app.use(errorHandler);
 
 app.listen(app.get('port'), () => {
     console.log('Server on port', app.get('port'));
